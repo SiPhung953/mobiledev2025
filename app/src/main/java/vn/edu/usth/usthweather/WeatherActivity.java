@@ -15,14 +15,17 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(DIAG, "OnCreate() initiated");
-
         super.onCreate(savedInstanceState);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView,Fragment.class,null)
-                .commit();
+        setContentView(R.layout.activity_weather);
 
+        class DetailsFragment extends Fragment {}
+        if (savedInstanceState == null) {
+            DetailsFragment firstFragment = new DetailsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainerView, firstFragment, null)
+                    .commit();
+        }
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
 
@@ -33,6 +36,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
         Log.i(DIAG, "onCreate initiated");
     }
+
 
 
     @Override
